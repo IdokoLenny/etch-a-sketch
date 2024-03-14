@@ -3,10 +3,15 @@ let numGrid=16
 let btnContainer=document.querySelector('.container')
 let reset=document.createElement('BUTTON')
 reset.textContent='Reset'
+reset.style.marginRight="1rem"
 let newbutton=document.createElement('BUTTON')
 newbutton.textContent='New'
+newbutton.style.marginRight="1rem"
+let randombtn=document.createElement('button')
+randombtn.textContent='Random Colors'
 btnContainer.appendChild(reset)
 btnContainer.appendChild(newbutton)
+btnContainer.appendChild(randombtn)
 btnContainer.style.cssText='width: 40%; margin: 2rem auto; text-align: center; '
 
 grid.style.cssText=`grid-template-rows: repeat(${numGrid}, 1fr); grid-template-columns: repeat(${numGrid}, 1fr);`
@@ -17,8 +22,10 @@ gridFormulator(numGrid)
 
 let celldivs=document.querySelectorAll('.cell')
 celldivs.forEach((celldiv) => {
+    let num=250
     celldiv.addEventListener('mouseover', () => {
-        celldiv.style.backgroundColor=`rgb(${getRandom()},${getRandom()},${getRandom()})`
+        celldiv.style.backgroundColor=`rgb(${num},${num},${num})`
+        num = num - 25;
     })    
 })
 
@@ -45,10 +52,45 @@ newbutton.addEventListener('click', ()=> {
 
     let celldivss=document.querySelectorAll('.cell')
     celldivss.forEach((celldiv) => {
+        let num=250
         celldiv.addEventListener('mouseover', () => {
-            celldiv.style.backgroundColor=`rgb(${getRandom()},${getRandom()},${getRandom()})`
+            celldiv.style.backgroundColor=`rgb(${num},${num},${num})`
+            num = num - 25;
         })    
     })
+})
+
+
+randombtn.addEventListener('click',() => {
+
+    randombtn.classList.toggle('btn-toggle')
+    let classTest= randombtn.classList.contains('btn-toggle')
+    if (classTest){
+        let celldivss=document.querySelectorAll('.cell')
+        celldivss.forEach((celldiv) => {
+            // celldiv.style.backgroundColor=`white`
+            let red=getRandom()
+            let blue=getRandom()
+            let green=getRandom()
+            celldiv.addEventListener('mouseover', () => {
+                celldiv.style.backgroundColor=`rgb(${red},${green},${blue})`
+                red=red - 15
+                green= green - 15
+                blue= blue - 15
+            })    
+        })
+    }
+    else {
+        let celldivss=document.querySelectorAll('.cell')
+        celldivss.forEach((celldiv) => {
+            // celldiv.style.backgroundColor=`white`
+            let num=250
+            celldiv.addEventListener('mouseover', () => {
+                celldiv.style.backgroundColor=`rgb(${num},${num},${num})`
+                num= num -25
+            })    
+        })
+    }
 })
 
 function getRandom(){
